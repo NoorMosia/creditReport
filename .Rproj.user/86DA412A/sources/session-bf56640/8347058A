@@ -3,11 +3,11 @@
     "path": "~/Desktop/STAS102/project-template.qmd",
     "project_path": "project-template.qmd",
     "type": "quarto_markdown",
-    "hash": "0",
+    "hash": "2037882488",
     "contents": "",
     "dirty": false,
     "created": 1729636391285.0,
-    "source_on_save": false,
+    "source_on_save": true,
     "relative_order": 1,
     "properties": {
         "source_window_id": "",
@@ -21,11 +21,11 @@
         "docOutlineVisible": "1"
     },
     "folds": "",
-    "lastKnownWriteTime": 1729757792,
+    "lastKnownWriteTime": 1729759503,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1729757792,
+    "last_content_update": 1729759503725,
     "read_only": false,
     "read_only_alternatives": []
 }
