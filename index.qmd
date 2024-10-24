@@ -1,5 +1,5 @@
 ---
-title: "Analysis of Factors Affecting Credit Score" 
+title: "Analysis of Factors Affecting Credit Rating" 
 subtitle: "Exploratory Data Analysis (EDA) and Statistical Inference Project (STAS102)" 
 author: "Mosia, Noor (229895735)" 
 date: "2024" 
@@ -74,18 +74,6 @@ knitr::kable(head(my_data))
 
 ```
 
-
-
-#####Still playing around with graphs to see what works
-```{r}
-# Scatter plot of Average Daily Production vs. Total Monthly Production
-ggplot(my_data, aes(x = credit_utilization_ratio, y = number_of_late_payments)) +
-  geom_point() +
-  geom_smooth(method = "lm", col = "red") +
-  labs(title = 'Average Daily Production vs. Average Monthly Production', x = 'Average Daily Production (kWh)', y = 'Average Monthly Production (kWh)')
-
-```
-
 ## Descriptive Statistics/ EDA
 
 Exploratory Data Analysis (EDA) helps us understand the underlying patterns, trends, and relationships within the data. It involves summarizing the main characteristics of the data, often using visual methods.
@@ -114,6 +102,25 @@ my_skim <- skim_with(
 my_skim(my_data)
 ```
 
+
+
+
+#####Still playing around with graphs to see what works
+```{r}
+# Scatter plot 
+ggplot(my_data, aes(x = credit_utilization_ratio, y = number_of_late_payments)) +
+  geom_point() +
+  geom_smooth(method = "lm", col = "red") +
+  labs(title = 'title will be here', x = 'x axis label will be here', y = 'y axis label will be here')
+
+
+
+#Bar plot
+ggplot(solar_power_data, aes(x = Sol_Panel_Type)) +
+  geom_bar(fill = 'blue') +
+  labs(title = 'Distribution of Solar Panel Types', x = 'Solar Panel Type', y = 'Count')
+
+```
 
 
 ## Statistical Inference
