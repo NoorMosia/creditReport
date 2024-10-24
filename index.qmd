@@ -116,9 +116,9 @@ ggplot(my_data, aes(x = credit_utilization_ratio, y = number_of_late_payments)) 
 
 
 #Bar plot
-ggplot(solar_power_data, aes(x = Sol_Panel_Type)) +
+ggplot(my_data, aes(x = occupation)) +
   geom_bar(fill = 'blue') +
-  labs(title = 'Distribution of Solar Panel Types', x = 'Solar Panel Type', y = 'Count')
+  labs(title = 'Distribution of individuals by occupation in sample', x = 'Occupation type', y = 'Count')
 
 ```
 
