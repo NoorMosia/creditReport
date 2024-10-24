@@ -74,6 +74,18 @@ knitr::kable(head(my_data))
 
 ```
 
+
+
+#####Still playing around with graphs to see what works
+```{r}
+# Scatter plot of Average Daily Production vs. Total Monthly Production
+ggplot(my_data, aes(x = credit_utilization_ratio, y = number_of_late_payments)) +
+  geom_point() +
+  geom_smooth(method = "lm", col = "red") +
+  labs(title = 'Average Daily Production vs. Average Monthly Production', x = 'Average Daily Production (kWh)', y = 'Average Monthly Production (kWh)')
+
+```
+
 ## Descriptive Statistics/ EDA
 
 Exploratory Data Analysis (EDA) helps us understand the underlying patterns, trends, and relationships within the data. It involves summarizing the main characteristics of the data, often using visual methods.

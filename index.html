@@ -262,6 +262,24 @@ background: #141c2b;
 </table>
 </div>
 </div>
+<p>#####Still playing around with graphs to see what works</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Scatter plot of Average Daily Production vs. Total Monthly Production</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">ggplot</span>(my_data, <span class="fu">aes</span>(<span class="at">x =</span> credit_utilization_ratio, <span class="at">y =</span> number_of_late_payments)) <span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">col =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Average Daily Production vs. Average Monthly Production'</span>, <span class="at">x =</span> <span class="st">'Average Daily Production (kWh)'</span>, <span class="at">y =</span> <span class="st">'Average Monthly Production (kWh)'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="descriptive-statistics-eda" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="descriptive-statistics-eda"><span class="header-section-number">3</span> Descriptive Statistics/ EDA</h2>
@@ -272,20 +290,20 @@ background: #141c2b;
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># using the skimr package, stating what I'd like to see on the table.</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>my_skim <span class="ot">&lt;-</span> <span class="fu">skim_with</span>(</span>
-<span id="cb5-3"><a href="#cb5-3"></a>  <span class="at">numeric =</span> <span class="fu">sfl</span>(<span class="at">mean =</span> mean, </span>
-<span id="cb5-4"><a href="#cb5-4"></a>                <span class="at">sd =</span> sd, </span>
-<span id="cb5-5"><a href="#cb5-5"></a>                <span class="at">min =</span> min, </span>
-<span id="cb5-6"><a href="#cb5-6"></a>                <span class="at">p25 =</span> <span class="sc">~</span> <span class="fu">quantile</span>(., .<span class="dv">25</span>),</span>
-<span id="cb5-7"><a href="#cb5-7"></a>                <span class="at">med =</span> median,</span>
-<span id="cb5-8"><a href="#cb5-8"></a>                <span class="at">p75 =</span> <span class="sc">~</span> <span class="fu">quantile</span>(., .<span class="dv">75</span>),</span>
-<span id="cb5-9"><a href="#cb5-9"></a>                <span class="at">max =</span> max),</span>
-<span id="cb5-10"><a href="#cb5-10"></a>  <span class="at">append =</span> <span class="cn">FALSE</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a>)</span>
-<span id="cb5-12"><a href="#cb5-12"></a></span>
-<span id="cb5-13"><a href="#cb5-13"></a><span class="co"># Summary statistics</span></span>
-<span id="cb5-14"><a href="#cb5-14"></a><span class="fu">my_skim</span>(my_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># using the skimr package, stating what I'd like to see on the table.</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>my_skim <span class="ot">&lt;-</span> <span class="fu">skim_with</span>(</span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="at">numeric =</span> <span class="fu">sfl</span>(<span class="at">mean =</span> mean, </span>
+<span id="cb6-4"><a href="#cb6-4"></a>                <span class="at">sd =</span> sd, </span>
+<span id="cb6-5"><a href="#cb6-5"></a>                <span class="at">min =</span> min, </span>
+<span id="cb6-6"><a href="#cb6-6"></a>                <span class="at">p25 =</span> <span class="sc">~</span> <span class="fu">quantile</span>(., .<span class="dv">25</span>),</span>
+<span id="cb6-7"><a href="#cb6-7"></a>                <span class="at">med =</span> median,</span>
+<span id="cb6-8"><a href="#cb6-8"></a>                <span class="at">p75 =</span> <span class="sc">~</span> <span class="fu">quantile</span>(., .<span class="dv">75</span>),</span>
+<span id="cb6-9"><a href="#cb6-9"></a>                <span class="at">max =</span> max),</span>
+<span id="cb6-10"><a href="#cb6-10"></a>  <span class="at">append =</span> <span class="cn">FALSE</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a>)</span>
+<span id="cb6-12"><a href="#cb6-12"></a></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co"># Summary statistics</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="fu">my_skim</span>(my_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
