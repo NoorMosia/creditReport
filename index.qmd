@@ -1,7 +1,7 @@
 ---
-title: "Analysis of Factors Affecting Credit Rating" 
+title: "Debt Analysis: How Occupation Affects Creditworthiness" 
 subtitle: "Exploratory Data Analysis (EDA) and Statistical Inference Project (STAS102)" 
-author: "Mosia, Noor (229895735)" 
+author: "Mosia, Noor (229895735)"
 date: "2024" 
 date-format: "YYYY" 
 title-block-banner: "#141c2b" 
@@ -38,17 +38,15 @@ my_data <- read_csv("credit_data.csv")
 
 ## Introduction
 
-In this report we will be using a random sample of `r count(my_data)` individuals to look at the relationship between a debtor's occupation, number of late payments for debts, debt to income ratio and credit utilization ratio. Then analyse how these variables affect a debtor's credit score.
-Furthermore, we will make use of statistical inference techniques to make decisions about the parameters related to debtors and their credit score based on the random sample we have acquired for this report.
+In this report we will be using a random sample of `r count(my_data)` individuals to look at the relationship between a debtor's occupation, number of late payments for debts, debt to income ratio and credit utilization ratio. Then analyse how these variables affect a debtor's credit score. Furthermore, we will make use of statistical inference techniques to make decisions about the parameters related to debtors and their credit score based on the random sample we have acquired for this report.
 
-The reason I chose this particular dataset is because I am interested in pursuing a career in the financial sector. This project will provide me with valuable foundational knowledge that is essential in understanding the  industry.
+The reason I chose this particular dataset is because I am interested in pursuing a career in the financial sector. This project will provide me with valuable foundational knowledge that is essential in understanding the industry.
 
 ## Data
 
-The data we will be using to analyse credit ratings includes the following variables:
+### Variables Summary
 
--   **`occupation`**: Categorical variable representing the job or profession of the individuals in the random sample. 
-For this report we have only included 5 occupations and the breakdown of their numbers is shown in the table below...
+-   **`occupation`**: Categorical variable representing the job or profession of the individuals in the random sample.
 
 -   **`credit_rating`**: Categorical variable, usually a number but for simplicity this time we it as a categorical variable. It represents an individial's creditworthiness. It is determined by looking at an individual's history and repayment behaviours.
 
@@ -58,6 +56,7 @@ For this report we have only included 5 occupations and the breakdown of their n
 
 -   **`credit utilization_ratio`**: Continuous variable. Represents the ratio of an individual's credit used and the total credit available to the them.
 
+### Distribution Breakdown
 The table below shows the distribution of the sample data terms of the occupations of each of the `r count(my_data)` individuals:
 
 ```{r}
@@ -65,14 +64,14 @@ occupationTable <-table(my_data$occupation)
 occupationTable
 ```
 
-Here is a preview of the first six entries of the dataset:
+
+### Preview of Sample Data
+
 ```{r}
 #| label: datapreview 
 
 # Display the first six entries
 knitr::kable(head(my_data))
-
-cor(my_data$debt_to_income_ratio, my_data$credit_utilization_ratio)
 
 ```
 
@@ -81,7 +80,6 @@ cor(my_data$debt_to_income_ratio, my_data$credit_utilization_ratio)
 Exploratory Data Analysis (EDA) helps us understand the underlying patterns, trends, and relationships within the data. It involves summarizing the main characteristics of the data, often using visual methods.
 
 ### Summary Statistics
-
 
 Summary statistics provide a quick overview of the data. They include measures of central tendency (mean, median) and dispersion (standard deviation, range).
 
@@ -103,12 +101,36 @@ my_skim <- skim_with(
 my_skim(my_data)
 ```
 
----
-we are here
-----
+### Variables in depth
+The dataset includes 6 types of `occupation`: Clerk, engineer, manager, nurse, salesperson and teacher. Engineers and managers are known to be paid much more than clerks and salespeople. The range in the earnings allows us to have a good representation of the population based on the earnings, even those that are not included in the sample.
+
+The categorical variable `credit_rating` indicates an individual's creditworthiness. It is used by credit providers to indicate the likelihood of an individual to pay back their debt. In our report, credit ratings are represented by 3 grades, poor, fair and good. poor would mean high risk of debtor not paying off their debt, fair means there is some risk but they are worth granting credit and good means the debtor has high creditworthiness and low risk of default.
+
+`Number_of_late_payments` is a numeric discrete variable and it represents the number of payments made at a later date than the one agreed upon by the debtor and the credit provider. This is a good representation of a debtors creditworthiness and will provide us with good information about a debtor's reliability based on their occupation.
+
+`Debt_to_income_ratio`, also refered to as DTI, is a metric that compares a debtor's total monthly debt payments to their gross monthly income. It is a good measure of how manageable a an individual's debt is. A high DTI affects a debtor's credit health in more than one way. Firstly, it indicates to credit providers that an individual is over-leveraged. Secondly, Any personal emergency, big or small, could result in a debtor missing their monthly payments. Understanding the DTI of different occupations can help identify occupations with high risk of financial distress.
+
+`Credit_utilization_ratio` is the measure of credit a person is using divided by the amount of credit that is available to them. A low credit utilization ratio indicates good credit management by a debtor. Analyzing credit utilization ratios accross different occupations can help identify groups that are risk of high utilization, this info could help credit providers in creating financial education programs for these occupation groups.
+
+### Distribution of occupations
+
+Visualizing the distribution of `occupations` helps us understand their spread and central tendency. To begin, gives us an indication of the spread of the occupations in the dataset.
+
+```{r}
+
+#| label: fig-occupations
+#| fig-cap: "Occupations Distribution"
+#| fig-align: "center"
+
+# Distribution of Occupations
+ggplot(my_data, aes(x = occupation)) +
+  geom_bar(fill = 'blue') +
+  labs(title = 'Distribution of Occupations', x = 'Occupations', y = 'Count')
 
 
+```
 
+Correlation coefficient `r cor(my_data$debt_to_income_ratio, my_data$credit_utilization_ratio)`
 
 ## Statistical Inference
 

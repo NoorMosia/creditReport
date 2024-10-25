@@ -9,7 +9,7 @@
 <meta name="author" content="Mosia, Noor (229895735)">
 <meta name="dcterms.date" content="2024-01-01">
 
-<title>Analysis of Factors Affecting Credit Rating</title>
+<title>Debt Analysis: How Occupation Affects Creditworthiness</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -96,7 +96,7 @@ background: #141c2b;
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Analysis of Factors Affecting Credit Rating</h1>
+      <h1 class="title">Debt Analysis: How Occupation Affects Creditworthiness</h1>
             <p class="subtitle lead">Exploratory Data Analysis (EDA) and Statistical Inference Project (STAS102)</p>
           </div>
 
@@ -161,14 +161,18 @@ background: #141c2b;
 </section>
 <section id="data" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="data"><span class="header-section-number">2</span> Data</h2>
-<p>The data we will be using to analyse credit ratings includes the following variables:</p>
+<section id="variables-summary" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="variables-summary"><span class="header-section-number">2.1</span> Variables Summary</h3>
 <ul>
-<li><p><strong><code>occupation</code></strong>: Categorical variable representing the job or profession of the individuals in the random sample. For this report we have only included 5 occupations and the breakdown of their numbers is shown in the table below…</p></li>
+<li><p><strong><code>occupation</code></strong>: Categorical variable representing the job or profession of the individuals in the random sample.</p></li>
 <li><p><strong><code>credit_rating</code></strong>: Categorical variable, usually a number but for simplicity this time we it as a categorical variable. It represents an individial’s creditworthiness. It is determined by looking at an individual’s history and repayment behaviours.</p></li>
 <li><p><strong><code>number_of_late_payments</code></strong>: Numerically discrete variable. Counts the number of times an individual made a late payment on their loan repayment.</p></li>
 <li><p><strong><code>debt_to_income_ratio</code></strong>: Continuos variable. Measures the ratio of an individual’s monthly debt payments to their gross income.</p></li>
 <li><p><strong><code>credit utilization_ratio</code></strong>: Continuous variable. Represents the ratio of an individual’s credit used and the total credit available to the them.</p></li>
 </ul>
+</section>
+<section id="distribution-breakdown" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="distribution-breakdown"><span class="header-section-number">2.2</span> Distribution Breakdown</h3>
 <p>The table below shows the distribution of the sample data terms of the occupations of each of the 244 individuals:</p>
 <div class="cell">
 <details class="code-fold">
@@ -182,7 +186,9 @@ background: #141c2b;
          23          45          26          58          40          52 </code></pre>
 </div>
 </div>
-<p>Here is a preview of the first six entries of the dataset:</p>
+</section>
+<section id="preview-of-sample-data" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="preview-of-sample-data"><span class="header-section-number">2.3</span> Preview of Sample Data</h3>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -261,14 +267,8 @@ background: #141c2b;
 </tbody>
 </table>
 </div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">cor</span>(my_data<span class="sc">$</span>debt_to_income_ratio, my_data<span class="sc">$</span>credit_utilization_ratio)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2207823</code></pre>
 </div>
-</div>
+</section>
 </section>
 <section id="descriptive-statistics-eda" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="descriptive-statistics-eda"><span class="header-section-number">3</span> Descriptive Statistics/ EDA</h2>
@@ -279,20 +279,20 @@ background: #141c2b;
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># using the skimr package, stating what I'd like to see on the table.</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>my_skim <span class="ot">&lt;-</span> <span class="fu">skim_with</span>(</span>
-<span id="cb7-3"><a href="#cb7-3"></a>  <span class="at">numeric =</span> <span class="fu">sfl</span>(<span class="at">mean =</span> mean, </span>
-<span id="cb7-4"><a href="#cb7-4"></a>                <span class="at">sd =</span> sd, </span>
-<span id="cb7-5"><a href="#cb7-5"></a>                <span class="at">min =</span> min, </span>
-<span id="cb7-6"><a href="#cb7-6"></a>                <span class="at">p25 =</span> <span class="sc">~</span> <span class="fu">quantile</span>(., .<span class="dv">25</span>),</span>
-<span id="cb7-7"><a href="#cb7-7"></a>                <span class="at">med =</span> median,</span>
-<span id="cb7-8"><a href="#cb7-8"></a>                <span class="at">p75 =</span> <span class="sc">~</span> <span class="fu">quantile</span>(., .<span class="dv">75</span>),</span>
-<span id="cb7-9"><a href="#cb7-9"></a>                <span class="at">max =</span> max),</span>
-<span id="cb7-10"><a href="#cb7-10"></a>  <span class="at">append =</span> <span class="cn">FALSE</span></span>
-<span id="cb7-11"><a href="#cb7-11"></a>)</span>
-<span id="cb7-12"><a href="#cb7-12"></a></span>
-<span id="cb7-13"><a href="#cb7-13"></a><span class="co"># Summary statistics</span></span>
-<span id="cb7-14"><a href="#cb7-14"></a><span class="fu">my_skim</span>(my_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># using the skimr package, stating what I'd like to see on the table.</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>my_skim <span class="ot">&lt;-</span> <span class="fu">skim_with</span>(</span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="at">numeric =</span> <span class="fu">sfl</span>(<span class="at">mean =</span> mean, </span>
+<span id="cb5-4"><a href="#cb5-4"></a>                <span class="at">sd =</span> sd, </span>
+<span id="cb5-5"><a href="#cb5-5"></a>                <span class="at">min =</span> min, </span>
+<span id="cb5-6"><a href="#cb5-6"></a>                <span class="at">p25 =</span> <span class="sc">~</span> <span class="fu">quantile</span>(., .<span class="dv">25</span>),</span>
+<span id="cb5-7"><a href="#cb5-7"></a>                <span class="at">med =</span> median,</span>
+<span id="cb5-8"><a href="#cb5-8"></a>                <span class="at">p75 =</span> <span class="sc">~</span> <span class="fu">quantile</span>(., .<span class="dv">75</span>),</span>
+<span id="cb5-9"><a href="#cb5-9"></a>                <span class="at">max =</span> max),</span>
+<span id="cb5-10"><a href="#cb5-10"></a>  <span class="at">append =</span> <span class="cn">FALSE</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>)</span>
+<span id="cb5-12"><a href="#cb5-12"></a></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="co"># Summary statistics</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="fu">my_skim</span>(my_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -464,13 +464,39 @@ background: #141c2b;
 </table>
 </div>
 </div>
-<table class="caption-top table">
-<tbody>
-<tr class="odd">
-<td>we are here</td>
-</tr>
-</tbody>
-</table>
+</section>
+<section id="variables-in-depth" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="variables-in-depth"><span class="header-section-number">3.2</span> Variables in depth</h3>
+<p>The dataset includes 6 types of <code>occupation</code>: Clerk, engineer, manager, nurse, salesperson and teacher. Engineers and managers are known to be paid much more than clerks and salespeople. The range in the earnings allows us to have a good representation of the population based on the earnings, even those that are not included in the sample.</p>
+<p>The categorical variable <code>credit_rating</code> indicates an individual’s creditworthiness. It is used by credit providers to indicate the likelihood of an individual to pay back their debt. In our report, credit ratings are represented by 3 grades, poor, fair and good. poor would mean high risk of debtor not paying off their debt, fair means there is some risk but they are worth granting credit and good means the debtor has high creditworthiness and low risk of default.</p>
+<p><code>Number_of_late_payments</code> is a numeric discrete variable and it represents the number of payments made at a later date than the one agreed upon by the debtor and the credit provider. This is a good representation of a debtors creditworthiness and will provide us with good information about a debtor’s reliability based on their occupation.</p>
+<p><code>Debt_to_income_ratio</code>, also refered to as DTI, is a metric that compares a debtor’s total monthly debt payments to their gross monthly income. It is a good measure of how manageable a an individual’s debt is. A high DTI affects a debtor’s credit health in more than one way. Firstly, it indicates to credit providers that an individual is over-leveraged. Secondly, Any personal emergency, big or small, could result in a debtor missing their monthly payments. Understanding the DTI of different occupations can help identify occupations with high risk of financial distress.</p>
+<p><code>Credit_utilization_ratio</code> is the measure of credit a person is using divided by the amount of credit that is available to them. A low credit utilization ratio indicates good credit management by a debtor. Analyzing credit utilization ratios accross different occupations can help identify groups that are risk of high utilization, this info could help credit providers in creating financial education programs for these occupation groups.</p>
+</section>
+<section id="distribution-of-occupations" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="distribution-of-occupations"><span class="header-section-number">3.3</span> Distribution of occupations</h3>
+<p>Visualizing the distribution of <code>occupations</code> helps us understand their spread and central tendency. To begin, gives us an indication of the spread of the occupations in the dataset.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">#| label: fig-occupations</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co">#| fig-cap: "Occupations Distribution"</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#| fig-align: "center"</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co"># Distribution of Occupations</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="fu">ggplot</span>(my_data, <span class="fu">aes</span>(<span class="at">x =</span> occupation)) <span class="sc">+</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">'blue'</span>) <span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Distribution of Occupations'</span>, <span class="at">x =</span> <span class="st">'Occupations'</span>, <span class="at">y =</span> <span class="st">'Count'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Correlation coefficient 0.2207823</p>
 </section>
 </section>
 <section id="statistical-inference" class="level2" data-number="4">
