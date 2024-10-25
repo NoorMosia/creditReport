@@ -143,7 +143,7 @@ background: #141c2b;
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>, <span class="at">message =</span> <span class="cn">FALSE</span>, <span class="at">cache =</span> <span class="cn">FALSE</span>) </span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>, <span class="at">message =</span> <span class="cn">FALSE</span>, <span class="at">cache =</span> <span class="cn">TRUE</span>) </span>
 <span id="cb1-2"><a href="#cb1-2"></a></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="co"># Load necessary libraries</span></span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(tidyverse)</span>
@@ -169,7 +169,7 @@ background: #141c2b;
 <li><p><strong><code>debt_to_income_ratio</code></strong>: Continuos variable. Measures the ratio of an individual’s monthly debt payments to their gross income.</p></li>
 <li><p><strong><code>credit utilization_ratio</code></strong>: Continuous variable. Represents the ratio of an individual’s credit used and the total credit available to the them.</p></li>
 </ul>
-<p>The table below shows how the data is broken down in terms of the occupations of each of the 244 individuals:</p>
+<p>The table below shows the distribution of the sample data terms of the occupations of each of the 244 individuals:</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -261,6 +261,13 @@ background: #141c2b;
 </tbody>
 </table>
 </div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">cor</span>(my_data<span class="sc">$</span>debt_to_income_ratio, my_data<span class="sc">$</span>credit_utilization_ratio)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2207823</code></pre>
+</div>
 </div>
 </section>
 <section id="descriptive-statistics-eda" class="level2" data-number="3">
@@ -272,20 +279,20 @@ background: #141c2b;
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># using the skimr package, stating what I'd like to see on the table.</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>my_skim <span class="ot">&lt;-</span> <span class="fu">skim_with</span>(</span>
-<span id="cb5-3"><a href="#cb5-3"></a>  <span class="at">numeric =</span> <span class="fu">sfl</span>(<span class="at">mean =</span> mean, </span>
-<span id="cb5-4"><a href="#cb5-4"></a>                <span class="at">sd =</span> sd, </span>
-<span id="cb5-5"><a href="#cb5-5"></a>                <span class="at">min =</span> min, </span>
-<span id="cb5-6"><a href="#cb5-6"></a>                <span class="at">p25 =</span> <span class="sc">~</span> <span class="fu">quantile</span>(., .<span class="dv">25</span>),</span>
-<span id="cb5-7"><a href="#cb5-7"></a>                <span class="at">med =</span> median,</span>
-<span id="cb5-8"><a href="#cb5-8"></a>                <span class="at">p75 =</span> <span class="sc">~</span> <span class="fu">quantile</span>(., .<span class="dv">75</span>),</span>
-<span id="cb5-9"><a href="#cb5-9"></a>                <span class="at">max =</span> max),</span>
-<span id="cb5-10"><a href="#cb5-10"></a>  <span class="at">append =</span> <span class="cn">FALSE</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a>)</span>
-<span id="cb5-12"><a href="#cb5-12"></a></span>
-<span id="cb5-13"><a href="#cb5-13"></a><span class="co"># Summary statistics</span></span>
-<span id="cb5-14"><a href="#cb5-14"></a><span class="fu">my_skim</span>(my_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># using the skimr package, stating what I'd like to see on the table.</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a>my_skim <span class="ot">&lt;-</span> <span class="fu">skim_with</span>(</span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="at">numeric =</span> <span class="fu">sfl</span>(<span class="at">mean =</span> mean, </span>
+<span id="cb7-4"><a href="#cb7-4"></a>                <span class="at">sd =</span> sd, </span>
+<span id="cb7-5"><a href="#cb7-5"></a>                <span class="at">min =</span> min, </span>
+<span id="cb7-6"><a href="#cb7-6"></a>                <span class="at">p25 =</span> <span class="sc">~</span> <span class="fu">quantile</span>(., .<span class="dv">25</span>),</span>
+<span id="cb7-7"><a href="#cb7-7"></a>                <span class="at">med =</span> median,</span>
+<span id="cb7-8"><a href="#cb7-8"></a>                <span class="at">p75 =</span> <span class="sc">~</span> <span class="fu">quantile</span>(., .<span class="dv">75</span>),</span>
+<span id="cb7-9"><a href="#cb7-9"></a>                <span class="at">max =</span> max),</span>
+<span id="cb7-10"><a href="#cb7-10"></a>  <span class="at">append =</span> <span class="cn">FALSE</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a>)</span>
+<span id="cb7-12"><a href="#cb7-12"></a></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="co"># Summary statistics</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="fu">my_skim</span>(my_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -457,38 +464,13 @@ background: #141c2b;
 </table>
 </div>
 </div>
-<p>#####Still playing around with graphs to see what works</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Scatter plot </span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">ggplot</span>(my_data, <span class="fu">aes</span>(<span class="at">x =</span> credit_utilization_ratio, <span class="at">y =</span> number_of_late_payments)) <span class="sc">+</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">col =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'title will be here'</span>, <span class="at">x =</span> <span class="st">'x axis label will be here'</span>, <span class="at">y =</span> <span class="st">'y axis label will be here'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">#Bar plot</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">ggplot</span>(my_data, <span class="fu">aes</span>(<span class="at">x =</span> occupation)) <span class="sc">+</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">'blue'</span>) <span class="sc">+</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Distribution of individuals by occupation in sample'</span>, <span class="at">x =</span> <span class="st">'Occupation type'</span>, <span class="at">y =</span> <span class="st">'Count'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td>we are here</td>
+</tr>
+</tbody>
+</table>
 </section>
 </section>
 <section id="statistical-inference" class="level2" data-number="4">

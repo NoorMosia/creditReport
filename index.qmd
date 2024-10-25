@@ -24,7 +24,7 @@ css: style.css
 #| label: setup_project  
 #| message: false
 
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, cache = FALSE) 
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, cache = TRUE) 
 
 # Load necessary libraries
 library(tidyverse)
@@ -58,7 +58,7 @@ For this report we have only included 5 occupations and the breakdown of their n
 
 -   **`credit utilization_ratio`**: Continuous variable. Represents the ratio of an individual's credit used and the total credit available to the them.
 
-The table below shows how the data is broken down in terms of the occupations of each of the `r count(my_data)` individuals:
+The table below shows the distribution of the sample data terms of the occupations of each of the `r count(my_data)` individuals:
 
 ```{r}
 occupationTable <-table(my_data$occupation)
@@ -72,12 +72,13 @@ Here is a preview of the first six entries of the dataset:
 # Display the first six entries
 knitr::kable(head(my_data))
 
+cor(my_data$debt_to_income_ratio, my_data$credit_utilization_ratio)
+
 ```
 
 ## Descriptive Statistics/ EDA
 
 Exploratory Data Analysis (EDA) helps us understand the underlying patterns, trends, and relationships within the data. It involves summarizing the main characteristics of the data, often using visual methods.
-
 
 ### Summary Statistics
 
@@ -102,25 +103,11 @@ my_skim <- skim_with(
 my_skim(my_data)
 ```
 
+---
+we are here
+----
 
 
-
-#####Still playing around with graphs to see what works
-```{r}
-# Scatter plot 
-ggplot(my_data, aes(x = credit_utilization_ratio, y = number_of_late_payments)) +
-  geom_point() +
-  geom_smooth(method = "lm", col = "red") +
-  labs(title = 'title will be here', x = 'x axis label will be here', y = 'y axis label will be here')
-
-
-
-#Bar plot
-ggplot(my_data, aes(x = occupation)) +
-  geom_bar(fill = 'blue') +
-  labs(title = 'Distribution of individuals by occupation in sample', x = 'Occupation type', y = 'Count')
-
-```
 
 
 ## Statistical Inference
