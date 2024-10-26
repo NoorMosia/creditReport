@@ -132,25 +132,68 @@ ggplot(my_data, aes(x = occupation)) +
 
 Correlation coefficient `r cor(my_data$debt_to_income_ratio, my_data$credit_utilization_ratio)`
 
+### Scatter plot of Debt to Income Ratio vs. Credit Utilization Ratio
+
+This scatter plot will help us understand the relationship between our two continuous variables.
+
+```{r}
+# Scatter plot of Debt to Income Ratio vs. Credit Utilization Ratio
+ggplot(my_data, aes(x = debt_to_income_ratio, y = credit_utilization_ratio)) +
+  geom_point() +
+  geom_smooth(method = "lm", col = "red") +
+  labs(title = 'Debt to Income Ratio  vs. Credit Utilization Ratio', x = 'Credit Utilization Ratio', y = 'Credit Utilization Ratio')
+```
+
+
+
+### Box plot of Debt to Income Ratio vs. Credit Utilization Ratio
+
+```{r}
+# Boxplot of Total Monthly Production by Solar Panel Type and Battery Storage
+ggplot(my_data, aes(x = occupation, y = debt_to_income_ratio, fill = as.factor(credit_rating))) +
+  geom_boxplot() +
+  labs(title = 'Average Monthly Production by Solar Panel Type and Battery Storage', x = 'Solar Panel Type', y = 'Average Monthly Production (kWh)', fill = 'Battery Storage')
+
+```
+
+
 ## Statistical Inference
 
 This section is for statistical inference.
+
 
 ### Estimation
 
 Use an estimation method to fit distribution on numerical discrete variable. maybe provide a plot to compare fit?
 
+``` {r}
+ci <- ci_mean(my_data$credit_utilization_ratio) 
+
+# Preview
+ci
+```
+
 #### Goodness-of-fit Test
 
 Perform goodness-of-fit test.
+
 
 ### Interval Estimation
 
 Provide confidence intervals.
 
+
 ### Hypothesis testing
 
 Perform a hypothesis test of your choosing.
+
+``` {r}
+# Hypothesis test for the impact of Battery Storage on Average Daily Production
+t_test <- t.test(my_data$credit_utilization_ratio, my_data$number_of_late_payments, data = my_data)
+t_test
+```
+
+It's not looking good brev
 
 ## Insights
 

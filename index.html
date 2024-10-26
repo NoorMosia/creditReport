@@ -498,6 +498,46 @@ background: #141c2b;
 </div>
 <p>Correlation coefficient 0.2207823</p>
 </section>
+<section id="scatter-plot-of-debt-to-income-ratio-vs.-credit-utilization-ratio" class="level3" data-number="3.4">
+<h3 data-number="3.4" class="anchored" data-anchor-id="scatter-plot-of-debt-to-income-ratio-vs.-credit-utilization-ratio"><span class="header-section-number">3.4</span> Scatter plot of Debt to Income Ratio vs.&nbsp;Credit Utilization Ratio</h3>
+<p>This scatter plot will help us understand the relationship between our two continuous variables.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Scatter plot of Debt to Income Ratio vs. Credit Utilization Ratio</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">ggplot</span>(my_data, <span class="fu">aes</span>(<span class="at">x =</span> debt_to_income_ratio, <span class="at">y =</span> credit_utilization_ratio)) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">col =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Debt to Income Ratio  vs. Credit Utilization Ratio'</span>, <span class="at">x =</span> <span class="st">'Credit Utilization Ratio'</span>, <span class="at">y =</span> <span class="st">'Credit Utilization Ratio'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="box-plot-of-debt-to-income-ratio-vs.-credit-utilization-ratio" class="level3" data-number="3.5">
+<h3 data-number="3.5" class="anchored" data-anchor-id="box-plot-of-debt-to-income-ratio-vs.-credit-utilization-ratio"><span class="header-section-number">3.5</span> Box plot of Debt to Income Ratio vs.&nbsp;Credit Utilization Ratio</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Boxplot of Total Monthly Production by Solar Panel Type and Battery Storage</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">ggplot</span>(my_data, <span class="fu">aes</span>(<span class="at">x =</span> occupation, <span class="at">y =</span> debt_to_income_ratio, <span class="at">fill =</span> <span class="fu">as.factor</span>(credit_rating))) <span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Average Monthly Production by Solar Panel Type and Battery Storage'</span>, <span class="at">x =</span> <span class="st">'Solar Panel Type'</span>, <span class="at">y =</span> <span class="st">'Average Monthly Production (kWh)'</span>, <span class="at">fill =</span> <span class="st">'Battery Storage'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="statistical-inference" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="statistical-inference"><span class="header-section-number">4</span> Statistical Inference</h2>
@@ -505,6 +545,24 @@ background: #141c2b;
 <section id="estimation" class="level3" data-number="4.1">
 <h3 data-number="4.1" class="anchored" data-anchor-id="estimation"><span class="header-section-number">4.1</span> Estimation</h3>
 <p>Use an estimation method to fit distribution on numerical discrete variable. maybe provide a plot to compare fit?</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>ci <span class="ot">&lt;-</span> <span class="fu">ci_mean</span>(my_data<span class="sc">$</span>credit_utilization_ratio) </span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="co"># Preview</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>ci</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Two-sided 95% t confidence interval for the population mean
+
+Sample estimate: 0.410041 
+Confidence interval:
+     2.5%     97.5% 
+0.3977805 0.4223015 </code></pre>
+</div>
+</div>
 <section id="goodness-of-fit-test" class="level4" data-number="4.1.1">
 <h4 data-number="4.1.1" class="anchored" data-anchor-id="goodness-of-fit-test"><span class="header-section-number">4.1.1</span> Goodness-of-fit Test</h4>
 <p>Perform goodness-of-fit test.</p>
@@ -517,6 +575,27 @@ background: #141c2b;
 <section id="hypothesis-testing" class="level3" data-number="4.3">
 <h3 data-number="4.3" class="anchored" data-anchor-id="hypothesis-testing"><span class="header-section-number">4.3</span> Hypothesis testing</h3>
 <p>Perform a hypothesis test of your choosing.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Hypothesis test for the impact of Battery Storage on Average Daily Production</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>t_test <span class="ot">&lt;-</span> <span class="fu">t.test</span>(my_data<span class="sc">$</span>credit_utilization_ratio, my_data<span class="sc">$</span>number_of_late_payments, <span class="at">data =</span> my_data)</span>
+<span id="cb11-3"><a href="#cb11-3"></a>t_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  my_data$credit_utilization_ratio and my_data$number_of_late_payments
+t = -16.584, df = 243.63, p-value &lt; 2.2e-16
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -3.218538 -2.535151
+sample estimates:
+mean of x mean of y 
+ 0.410041  3.286885 </code></pre>
+</div>
+</div>
 </section>
 </section>
 <section id="insights" class="level2" data-number="5">
