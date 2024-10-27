@@ -130,6 +130,7 @@ ggplot(my_data, aes(x = occupation)) +
 
 ```
 
+The box plot above helps us understand the distribution better. From looking at the graph, we see that there is a good variation in occupations represented. The range of income between the occupations is good as we have clerks representing low income occupations, teachers and nurses representing medium income occupations and managers together with engineers representing high income occupations. The range income with allow us to use findings from this report to make decisions about other occupations that are not included in our sample data.
 
 ### Scatter plot of Debt to Income Ratio vs. Credit Utilization Ratio
 
