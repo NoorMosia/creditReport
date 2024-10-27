@@ -496,7 +496,6 @@ background: #141c2b;
 </div>
 </div>
 </div>
-<p>Correlation coefficient 0.2207823</p>
 </section>
 <section id="scatter-plot-of-debt-to-income-ratio-vs.-credit-utilization-ratio" class="level3" data-number="3.4">
 <h3 data-number="3.4" class="anchored" data-anchor-id="scatter-plot-of-debt-to-income-ratio-vs.-credit-utilization-ratio"><span class="header-section-number">3.4</span> Scatter plot of Debt to Income Ratio vs.&nbsp;Credit Utilization Ratio</h3>
@@ -518,6 +517,7 @@ background: #141c2b;
 </div>
 </div>
 </div>
+<p>By inspecting the scatter plot above, we see a weak linear relationship between debt to income ratio and credit utilization ratio. We can also find the correlation coefficient by using the R built in function <code>cor()</code> to examine the relationship between the two variables. For these two variables we find the correlation coefficient to be <code>0.2207823</code>, which supports the weak positive linear relationship that we see visually from the scatter plot. <br> What is being indicated by the red line is a linear regression model showing a general trend. The general trend is that as the debt to income ratio increases, the credit utilization ratio also increases slightly. This suggests that there are other factors that influence an individual’s credit utilization ratio besides their debt to income ratio. Overall, the positive linear correlation provides some information, but it also suggests that further analyses using other variables needs to be done to understand the factors involved.</p>
 </section>
 <section id="box-plot-of-debt-to-income-ratio-vs.-credit-utilization-ratio" class="level3" data-number="3.5">
 <h3 data-number="3.5" class="anchored" data-anchor-id="box-plot-of-debt-to-income-ratio-vs.-credit-utilization-ratio"><span class="header-section-number">3.5</span> Box plot of Debt to Income Ratio vs.&nbsp;Credit Utilization Ratio</h3>
@@ -575,27 +575,7 @@ Confidence interval:
 <section id="hypothesis-testing" class="level3" data-number="4.3">
 <h3 data-number="4.3" class="anchored" data-anchor-id="hypothesis-testing"><span class="header-section-number">4.3</span> Hypothesis testing</h3>
 <p>Perform a hypothesis test of your choosing.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Hypothesis test for the impact of Battery Storage on Average Daily Production</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>t_test <span class="ot">&lt;-</span> <span class="fu">t.test</span>(my_data<span class="sc">$</span>credit_utilization_ratio, my_data<span class="sc">$</span>number_of_late_payments, <span class="at">data =</span> my_data)</span>
-<span id="cb11-3"><a href="#cb11-3"></a>t_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Welch Two Sample t-test
-
-data:  my_data$credit_utilization_ratio and my_data$number_of_late_payments
-t = -16.584, df = 243.63, p-value &lt; 2.2e-16
-alternative hypothesis: true difference in means is not equal to 0
-95 percent confidence interval:
- -3.218538 -2.535151
-sample estimates:
-mean of x mean of y 
- 0.410041  3.286885 </code></pre>
-</div>
-</div>
+<p>It’s not looking good brev</p>
 </section>
 </section>
 <section id="insights" class="level2" data-number="5">
