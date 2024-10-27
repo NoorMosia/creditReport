@@ -169,6 +169,9 @@ This section is for statistical inference.
 
 Use an estimation method to fit distribution on numerical discrete variable. maybe provide a plot to compare fit?
 
+
+### Interval Estimation
+
 ``` {r}
 ci <- ci_mean(my_data$credit_utilization_ratio) 
 
@@ -176,23 +179,20 @@ ci <- ci_mean(my_data$credit_utilization_ratio)
 ci
 ```
 
-#### Goodness-of-fit Test
+
+### Hypothesis testing
+```{r}
+
+mean1 <- mean(my_data$debt_to_income_ratio)
+
+t_test = t.test(x=my_data$debt_to_income_ratio, mu=mean1, alternative="two.sided")
+t_test
+```
+
+### Goodness-of-fit Test
 
 Perform goodness-of-fit test.
 
-
-### Interval Estimation
-
-Provide confidence intervals.
-
-
-### Hypothesis testing
-
-Perform a hypothesis test of your choosing.
-
-
-
-It's not looking good brev
 
 ## Insights
 

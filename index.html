@@ -546,6 +546,9 @@ background: #141c2b;
 <section id="estimation" class="level3" data-number="4.1">
 <h3 data-number="4.1" class="anchored" data-anchor-id="estimation"><span class="header-section-number">4.1</span> Estimation</h3>
 <p>Use an estimation method to fit distribution on numerical discrete variable. maybe provide a plot to compare fit?</p>
+</section>
+<section id="interval-estimation" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="interval-estimation"><span class="header-section-number">4.2</span> Interval Estimation</h3>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -564,19 +567,35 @@ Confidence interval:
 0.3977805 0.4223015 </code></pre>
 </div>
 </div>
-<section id="goodness-of-fit-test" class="level4" data-number="4.1.1">
-<h4 data-number="4.1.1" class="anchored" data-anchor-id="goodness-of-fit-test"><span class="header-section-number">4.1.1</span> Goodness-of-fit Test</h4>
-<p>Perform goodness-of-fit test.</p>
-</section>
-</section>
-<section id="interval-estimation" class="level3" data-number="4.2">
-<h3 data-number="4.2" class="anchored" data-anchor-id="interval-estimation"><span class="header-section-number">4.2</span> Interval Estimation</h3>
-<p>Provide confidence intervals.</p>
 </section>
 <section id="hypothesis-testing" class="level3" data-number="4.3">
 <h3 data-number="4.3" class="anchored" data-anchor-id="hypothesis-testing"><span class="header-section-number">4.3</span> Hypothesis testing</h3>
-<p>Perform a hypothesis test of your choosing.</p>
-<p>It’s not looking good brev</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>mean1 <span class="ot">&lt;-</span> <span class="fu">mean</span>(my_data<span class="sc">$</span>debt_to_income_ratio)</span>
+<span id="cb11-2"><a href="#cb11-2"></a></span>
+<span id="cb11-3"><a href="#cb11-3"></a>t_test <span class="ot">=</span> <span class="fu">t.test</span>(<span class="at">x=</span>my_data<span class="sc">$</span>debt_to_income_ratio, <span class="at">mu=</span>mean1, <span class="at">alternative=</span><span class="st">"two.sided"</span>)</span>
+<span id="cb11-4"><a href="#cb11-4"></a>t_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  my_data$debt_to_income_ratio
+t = 0, df = 243, p-value = 1
+alternative hypothesis: true mean is not equal to 0.3346311
+95 percent confidence interval:
+ 0.3201950 0.3490673
+sample estimates:
+mean of x 
+0.3346311 </code></pre>
+</div>
+</div>
+</section>
+<section id="goodness-of-fit-test" class="level3" data-number="4.4">
+<h3 data-number="4.4" class="anchored" data-anchor-id="goodness-of-fit-test"><span class="header-section-number">4.4</span> Goodness-of-fit Test</h3>
+<p>Perform goodness-of-fit test.</p>
 </section>
 </section>
 <section id="insights" class="level2" data-number="5">
