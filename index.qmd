@@ -117,17 +117,14 @@ The categorical variable `credit_rating` indicates an individual's creditworthin
 Visualizing the distribution of `occupations` helps us understand their spread and central tendency. To begin, gives us an indication of the spread of the occupations in the dataset.
 
 ```{r}
-
 #| label: fig-occupations
 #| fig-cap: "Occupations Distribution"
 #| fig-align: "center"
 
 # Distribution of Occupations
 ggplot(my_data, aes(x = occupation)) +
-  geom_bar(fill = 'blue') +
+  geom_bar(fill = '#006B34') +
   labs(title = 'Distribution of Occupations', x = 'Occupations', y = 'Count')
-
-
 ```
 
 The box plot above helps us understand the distribution better. From looking at the graph, we see that there is a good variation in occupations represented. The range of income between the occupations is good as we have clerks representing low income occupations, teachers and nurses representing medium income occupations and managers together with engineers representing high income occupations. The range income with allow us to use findings from this report to make decisions about other occupations that are not included in our sample data.
@@ -165,11 +162,6 @@ ggplot(my_data, aes(x = occupation, y = debt_to_income_ratio, fill = as.factor(c
 This section is for statistical inference.
 
 
-### Estimation
-
-Use an estimation method to fit distribution on numerical discrete variable. maybe provide a plot to compare fit?
-
-
 ### Interval Estimation
 
 ``` {r}
@@ -179,21 +171,38 @@ ci <- ci_mean(my_data$credit_utilization_ratio)
 ci
 ```
 
+The 95% confidence interval for credit utilization ratio is approximately [0.3977805,0.4223015]. This interval means the true value of the average credit utilization ratio is within this range. This information is important in determining the range of DTI in the population.
+
 
 ### Hypothesis testing
+
 ```{r}
-
 mean1 <- mean(my_data$debt_to_income_ratio)
+```
+Null Hypothesis (H0): The true mean for debt to income ratio is equal to `r mean1`
 
+Alternative Hypothesis (H1): The true mean for debt to income ratio is equal to `r mean1`
+
+```{r}
 t_test = t.test(x=my_data$debt_to_income_ratio, mu=mean1, alternative="two.sided")
 t_test
 ```
 
+The p-value from the t-test is equal to 1, indicating that we fail to reject the null hypothesis. Therefore, the true mean of the population for debt to income ration is `r mean1`.
+
+
+
 ### Goodness-of-fit Test
+```{r}
+hist(my_data$number_of_late_payments, xlab = "Number of late payments", main = "Histogram of number of late payments", col = "#006B34")
+```
 
-Perform goodness-of-fit test.
+```{r}
+freq = table(my_data$number_of_late_payments)
 
+dt(x = freq, df = length(freq))
 
+```
 ## Insights
 
 Provide key findings.

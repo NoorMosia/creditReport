@@ -476,22 +476,23 @@ background: #141c2b;
 <section id="distribution-of-occupations" class="level3" data-number="3.3">
 <h3 data-number="3.3" class="anchored" data-anchor-id="distribution-of-occupations"><span class="header-section-number">3.3</span> Distribution of occupations</h3>
 <p>Visualizing the distribution of <code>occupations</code> helps us understand their spread and central tendency. To begin, gives us an indication of the spread of the occupations in the dataset.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">#| label: fig-occupations</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="co">#| fig-cap: "Occupations Distribution"</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#| fig-align: "center"</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="co"># Distribution of Occupations</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="fu">ggplot</span>(my_data, <span class="fu">aes</span>(<span class="at">x =</span> occupation)) <span class="sc">+</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">'blue'</span>) <span class="sc">+</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Distribution of Occupations'</span>, <span class="at">x =</span> <span class="st">'Occupations'</span>, <span class="at">y =</span> <span class="st">'Count'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Distribution of Occupations</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">ggplot</span>(my_data, <span class="fu">aes</span>(<span class="at">x =</span> occupation)) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">'#006B34'</span>) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Distribution of Occupations'</span>, <span class="at">x =</span> <span class="st">'Occupations'</span>, <span class="at">y =</span> <span class="st">'Count'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-occupations" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-occupations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-occupations-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-occupations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Occupations Distribution
+</figcaption>
 </figure>
 </div>
 </div>
@@ -543,12 +544,8 @@ background: #141c2b;
 <section id="statistical-inference" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="statistical-inference"><span class="header-section-number">4</span> Statistical Inference</h2>
 <p>This section is for statistical inference.</p>
-<section id="estimation" class="level3" data-number="4.1">
-<h3 data-number="4.1" class="anchored" data-anchor-id="estimation"><span class="header-section-number">4.1</span> Estimation</h3>
-<p>Use an estimation method to fit distribution on numerical discrete variable. maybe provide a plot to compare fit?</p>
-</section>
-<section id="interval-estimation" class="level3" data-number="4.2">
-<h3 data-number="4.2" class="anchored" data-anchor-id="interval-estimation"><span class="header-section-number">4.2</span> Interval Estimation</h3>
+<section id="interval-estimation" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="interval-estimation"><span class="header-section-number">4.1</span> Interval Estimation</h3>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -567,16 +564,23 @@ Confidence interval:
 0.3977805 0.4223015 </code></pre>
 </div>
 </div>
+<p>The 95% confidence interval for credit utilization ratio is approximately [0.3977805,0.4223015]. This interval means the true value of the average credit utilization ratio is within this range. This information is important in determining the range of DTI in the population.</p>
 </section>
-<section id="hypothesis-testing" class="level3" data-number="4.3">
-<h3 data-number="4.3" class="anchored" data-anchor-id="hypothesis-testing"><span class="header-section-number">4.3</span> Hypothesis testing</h3>
+<section id="hypothesis-testing" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="hypothesis-testing"><span class="header-section-number">4.2</span> Hypothesis testing</h3>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>mean1 <span class="ot">&lt;-</span> <span class="fu">mean</span>(my_data<span class="sc">$</span>debt_to_income_ratio)</span>
-<span id="cb11-2"><a href="#cb11-2"></a></span>
-<span id="cb11-3"><a href="#cb11-3"></a>t_test <span class="ot">=</span> <span class="fu">t.test</span>(<span class="at">x=</span>my_data<span class="sc">$</span>debt_to_income_ratio, <span class="at">mu=</span>mean1, <span class="at">alternative=</span><span class="st">"two.sided"</span>)</span>
-<span id="cb11-4"><a href="#cb11-4"></a>t_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>mean1 <span class="ot">&lt;-</span> <span class="fu">mean</span>(my_data<span class="sc">$</span>debt_to_income_ratio)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Null Hypothesis (H0): The true mean for debt to income ratio is equal to 0.3346311</p>
+<p>Alternative Hypothesis (H1): The true mean for debt to income ratio is equal to 0.3346311</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>t_test <span class="ot">=</span> <span class="fu">t.test</span>(<span class="at">x=</span>my_data<span class="sc">$</span>debt_to_income_ratio, <span class="at">mu=</span>mean1, <span class="at">alternative=</span><span class="st">"two.sided"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2"></a>t_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -592,10 +596,40 @@ mean of x
 0.3346311 </code></pre>
 </div>
 </div>
+<p>The p-value from the t-test is equal to 1, indicating that we fail to reject the null hypothesis. Therefore, the true mean of the population for debt to income ration is 0.3346311.</p>
 </section>
-<section id="goodness-of-fit-test" class="level3" data-number="4.4">
-<h3 data-number="4.4" class="anchored" data-anchor-id="goodness-of-fit-test"><span class="header-section-number">4.4</span> Goodness-of-fit Test</h3>
-<p>Perform goodness-of-fit test.</p>
+<section id="goodness-of-fit-test" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="goodness-of-fit-test"><span class="header-section-number">4.3</span> Goodness-of-fit Test</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">hist</span>(my_data<span class="sc">$</span>number_of_late_payments, <span class="at">xlab =</span> <span class="st">"Number of late payments"</span>, <span class="at">main =</span> <span class="st">"Histogram of number of late payments"</span>, <span class="at">col =</span> <span class="st">"#006B34"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>freq <span class="ot">=</span> <span class="fu">table</span>(my_data<span class="sc">$</span>number_of_late_payments)</span>
+<span id="cb15-2"><a href="#cb15-2"></a></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="fu">dt</span>(<span class="at">x =</span> freq, <span class="at">df =</span> <span class="fu">length</span>(freq))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+           0            1            2            3            4            5 
+3.644342e-12 6.870583e-19 8.928344e-18 4.765658e-13 2.343178e-15 1.662411e-09 
+           6            7            8            9           10           11 
+7.653976e-12 2.270882e-07 2.270882e-07 1.803587e-04 9.465921e-03 9.465921e-03 
+          12           14 
+2.335808e-01 2.335808e-01 </code></pre>
+</div>
+</div>
 </section>
 </section>
 <section id="insights" class="level2" data-number="5">
