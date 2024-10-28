@@ -502,23 +502,24 @@ Figure&nbsp;1: Occupations Distribution
 <section id="scatter-plot-of-debt-to-income-ratio-vs.-credit-utilization-ratio" class="level3" data-number="3.4">
 <h3 data-number="3.4" class="anchored" data-anchor-id="scatter-plot-of-debt-to-income-ratio-vs.-credit-utilization-ratio"><span class="header-section-number">3.4</span> Scatter plot of Debt to Income Ratio vs.&nbsp;Credit Utilization Ratio</h3>
 <p>This scatter plot will help us understand the relationship between our two continuous variables.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Scatter plot of Debt to Income Ratio vs. Credit Utilization Ratio</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="co">#| label: fig-occupations</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="co">#| fig-cap: "Debt to Income Ratio  vs. Credit Utilization Ratio"</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#| fig-align: "center"</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a></span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="fu">ggplot</span>(my_data, <span class="fu">aes</span>(<span class="at">x =</span> debt_to_income_ratio, <span class="at">y =</span> credit_utilization_ratio)) <span class="sc">+</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">col =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb7-9"><a href="#cb7-9"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Debt to Income Ratio  vs. Credit Utilization Ratio'</span>, <span class="at">x =</span> <span class="st">'Debt to Income Ratio'</span>, <span class="at">y =</span> <span class="st">'Credit Utilization Ratio'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">ggplot</span>(my_data, <span class="fu">aes</span>(<span class="at">x =</span> debt_to_income_ratio, <span class="at">y =</span> credit_utilization_ratio)) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">col =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Debt to Income Ratio  vs. Credit Utilization Ratio'</span>, <span class="at">x =</span> <span class="st">'Debt to Income Ratio'</span>, <span class="at">y =</span> <span class="st">'Credit Utilization Ratio'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-ratios" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ratios-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-ratios-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ratios-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Debt to Income Ratio vs.&nbsp;Credit Utilization Ratio
+</figcaption>
 </figure>
 </div>
 </div>
@@ -527,7 +528,7 @@ Figure&nbsp;1: Occupations Distribution
 </section>
 <section id="box-plot-of-debt-to-income-ratio-vs.-credit-utilization-ratio" class="level3" data-number="3.5">
 <h3 data-number="3.5" class="anchored" data-anchor-id="box-plot-of-debt-to-income-ratio-vs.-credit-utilization-ratio"><span class="header-section-number">3.5</span> Box plot of Debt to Income Ratio vs.&nbsp;Credit Utilization Ratio</h3>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Boxplot of Total Monthly Production by Solar Panel Type and Battery Storage</span></span>
@@ -536,16 +537,21 @@ Figure&nbsp;1: Occupations Distribution
 <span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Debt to income ratio vs credit rating by occupation'</span>, <span class="at">x =</span> <span class="st">'Occupation'</span>, <span class="at">y =</span> <span class="st">'Debt to income ratio'</span>, <span class="at">fill =</span> <span class="st">'Credit Rating'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-boxplot" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-boxplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-boxplot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Box plot of Debt to income ratio vs credit rating by occupation
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>For <code>fair credit ratings</code>, engineers generally have higher quartiles. This shows that they tend to have a higher debt to income ratio even when maintaining a fair credit rating.</p>
 <p>For <code>good credit ratings</code>, the median is fairly close between all occupations.</p>
-<p>For <code>poor credit ratings</code>, there is an insignificant number of engineers and managers. Clerks have a significanctly higher median debt to income ratio than all the other occupations.</p>
+<p>For <code>poor credit ratings</code>, there is an insignificant number of engineers and managers with a poor credit rating. Clerks have a significantly higher median debt to income ratio than all the other occupations.</p>
 </section>
 </section>
 <section id="statistical-inference" class="level2" data-number="4">
@@ -553,7 +559,7 @@ Figure&nbsp;1: Occupations Distribution
 <section id="estimation" class="level3" data-number="4.1">
 <h3 data-number="4.1" class="anchored" data-anchor-id="estimation"><span class="header-section-number">4.1</span> Estimation</h3>
 <p>For this dataset, the discrete variable is <code>number_of_late_payments</code>. The poisson distribution is going to be fitted on this variable. By the method of moments process, the sample mean is used to estimate the unknown lambda parameter of the poisson distribution. So the sample mean of <code>3.2868852</code> will be used to estimate lambda.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">options</span>(<span class="at">scipen=</span><span class="dv">999</span>) <span class="co"># to see decimals not exponential notation</span></span>
@@ -586,9 +592,14 @@ Figure&nbsp;1: Occupations Distribution
 <span id="cb9-28"><a href="#cb9-28"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Plot of poisson distribution"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-poisson" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-poisson-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-poisson-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-poisson-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Plot of poisson distribution for number of late payments
+</figcaption>
 </figure>
 </div>
 </div>
@@ -641,15 +652,15 @@ Confidence interval:
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>mean1 <span class="ot">&lt;-</span> <span class="fu">mean</span>(my_data<span class="sc">$</span>debt_to_income_ratio)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>dti_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(my_data<span class="sc">$</span>debt_to_income_ratio)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Null Hypothesis (H0): The true mean for debt to income ratio is equal to <code>3.2868852</code></p>
-<p>Alternative Hypothesis (H1): The true mean for debt to income ratio is equal to 0.3346311</p>
+<p>Null Hypothesis (H0): The true mean for debt to income ratio is equal to <code>0.3346311</code></p>
+<p>Alternative Hypothesis (H1): The true mean for debt to income ratio is not equal to <code>0.3346311</code></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>t_test <span class="ot">=</span> <span class="fu">t.test</span>(<span class="at">x=</span>my_data<span class="sc">$</span>debt_to_income_ratio, <span class="at">mu=</span>mean1, <span class="at">alternative=</span><span class="st">"two.sided"</span>)</span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>t_test <span class="ot">=</span> <span class="fu">t.test</span>(<span class="at">x=</span>my_data<span class="sc">$</span>debt_to_income_ratio, <span class="at">mu=</span>dti_mean, <span class="at">alternative=</span><span class="st">"two.sided"</span>)</span>
 <span id="cb15-2"><a href="#cb15-2"></a>t_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
@@ -666,7 +677,7 @@ mean of x
 0.3346311 </code></pre>
 </div>
 </div>
-<p>The p-value from the t-test is equal to 1, indicating that we fail to reject the null hypothesis. Therefore, the true mean of the population for debt to income ration is 0.3346311.</p>
+<p>The p-value from the t-test is equal to 1, indicating that we fail to reject the null hypothesis. Therefore, the true mean of the population for debt to income ration is <code>0.3346311</code>.</p>
 </section>
 </section>
 <section id="insights" class="level2" data-number="5">
@@ -683,7 +694,7 @@ mean of x
 <section id="conclusion" class="level2" data-number="6">
 <h2 data-number="6" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">6</span> Conclusion</h2>
 <p>This report provides an analysis on various various variables that can affect an individual’s credit score. Through exploratory data analysis, we identified the distributions and relationships between variables. Statistical inference methods were used to draw conclusions about the data. Key insights highlighted the overall trends and relationships within the dataset. This analysis can help inform decisions related to solar power production and the factors that influence it.</p>
-<p>The analyses suggest that a high paying occupation protects an individual from having a poor credit rating. It has also been confirmed that the true average for debt to income ratio is 0.3346311.</p>
+<p>The analyses suggest that a high paying occupation protects an individual from having a poor credit rating. It has also been confirmed that the true average for debt to income ratio is <code>0.3346311</code>.</p>
 </section>
 <section id="recommendations" class="level2" data-number="7">
 <h2 data-number="7" class="anchored" data-anchor-id="recommendations"><span class="header-section-number">7</span> Recommendations</h2>

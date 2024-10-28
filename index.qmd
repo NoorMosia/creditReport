@@ -136,11 +136,11 @@ The box plot above helps us understand the distribution better. From looking at 
 This scatter plot will help us understand the relationship between our two continuous variables.
 
 ```{r}
-# Scatter plot of Debt to Income Ratio vs. Credit Utilization Ratio
-#| label: fig-occupations
+#| label: fig-ratios
 #| fig-cap: "Debt to Income Ratio  vs. Credit Utilization Ratio"
 #| fig-align: "center"
 
+# Scatter plot of Debt to Income Ratio vs. Credit Utilization Ratio
 ggplot(my_data, aes(x = debt_to_income_ratio, y = credit_utilization_ratio)) +
   geom_point() +
   geom_smooth(method = "lm", col = "red") +
@@ -152,6 +152,9 @@ By inspecting the scatter plot above, we see a weak linear relationship between 
 ### Box plot of Debt to Income Ratio vs. Credit Utilization Ratio
 
 ```{r}
+#| label: fig-boxplot
+#| fig-cap: "Box plot of Debt to income ratio vs credit rating by occupation"
+#| fig-align: "center"
 # Boxplot of Total Monthly Production by Solar Panel Type and Battery Storage
 ggplot(my_data, aes(x = occupation, y = debt_to_income_ratio, fill = as.factor(credit_rating))) +
   geom_boxplot() +
@@ -163,7 +166,7 @@ For `fair credit ratings`, engineers generally have higher quartiles. This shows
 
 For `good credit ratings`, the median is fairly close between all occupations.
 
-For `poor credit ratings`, there is an insignificant number of engineers and managers. Clerks have a significanctly higher median debt to income ratio than all the other occupations.
+For `poor credit ratings`, there is an insignificant number of engineers and managers with a poor credit rating. Clerks have a significantly higher median debt to income ratio than all the other occupations.
 
 ## Statistical Inference
 
@@ -172,6 +175,9 @@ For `poor credit ratings`, there is an insignificant number of engineers and man
 For this dataset, the discrete variable is `number_of_late_payments`. The poisson distribution is going to be fitted on this variable. By the method of moments process, the sample mean is used to estimate the unknown lambda parameter of the poisson distribution. So the sample mean of ``r mean(my_data$number_of_late_payments)`` will be used to estimate lambda.
 
 ```{r}
+#| label: fig-poisson
+#| fig-cap: "Plot of poisson distribution for number of late payments"
+#| fig-align: "center"
 options(scipen=999) # to see decimals not exponential notation
 
 #Discrete variable
@@ -228,19 +234,19 @@ The 95% confidence interval for credit utilization ratio is approximately \[0.39
 ### Hypothesis testing
 
 ```{r}
-mean1 <- mean(my_data$debt_to_income_ratio)
+dti_mean <- mean(my_data$debt_to_income_ratio)
 ```
 
-Null Hypothesis (H0): The true mean for debt to income ratio is equal to ``r mean(my_data$number_of_late_payments)``
+Null Hypothesis (H0): The true mean for debt to income ratio is equal to ``r dti_mean``
 
-Alternative Hypothesis (H1): The true mean for debt to income ratio is equal to `r mean1`
+Alternative Hypothesis (H1): The true mean for debt to income ratio is not equal to ``r dti_mean``
 
 ```{r}
-t_test = t.test(x=my_data$debt_to_income_ratio, mu=mean1, alternative="two.sided")
+t_test = t.test(x=my_data$debt_to_income_ratio, mu=dti_mean, alternative="two.sided")
 t_test
 ```
 
-The p-value from the t-test is equal to 1, indicating that we fail to reject the null hypothesis. Therefore, the true mean of the population for debt to income ration is `r mean1`.
+The p-value from the t-test is equal to 1, indicating that we fail to reject the null hypothesis. Therefore, the true mean of the population for debt to income ration is ``r dti_mean``.
 
 ## Insights
 
@@ -261,7 +267,7 @@ Based on the exploratory data analysis and statistical inference, here are the k
 
 This report provides an analysis on various various variables that can affect an individual's credit score. Through exploratory data analysis, we identified the distributions and relationships between variables. Statistical inference methods were used to draw conclusions about the data. Key insights highlighted the overall trends and relationships within the dataset. This analysis can help inform decisions related to solar power production and the factors that influence it.
 
-The analyses suggest that a high paying occupation protects an individual from having a poor credit rating. It has also been confirmed that the true average for debt to income ratio is `r mean1`.
+The analyses suggest that a high paying occupation protects an individual from having a poor credit rating. It has also been confirmed that the true average for debt to income ratio is ``r dti_mean``.
 
 ## Recommendations
 
