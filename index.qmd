@@ -57,13 +57,13 @@ The reason I chose this particular dataset is because I am interested in pursuin
 -   **`credit utilization_ratio`**: Continuous variable. Represents the ratio of an individual's credit used and the total credit available to the them.
 
 ### Distribution Breakdown
+
 The table below shows the distribution of the sample data terms of the occupations of each of the `r count(my_data)` individuals:
 
 ```{r}
 occupationTable <-table(my_data$occupation)
 occupationTable
 ```
-
 
 ### Preview of Sample Data
 
@@ -102,6 +102,7 @@ my_skim(my_data)
 ```
 
 ### Variables in depth
+
 The dataset includes 6 types of `occupation`: Clerk, engineer, manager, nurse, salesperson and teacher. Engineers and managers are known to be paid much more than clerks and salespeople. The range in the earnings allows us to have a good representation of the population based on the earnings, even those that are not included in the sample.
 
 The categorical variable `credit_rating` indicates an individual's creditworthiness. It is used by credit providers to indicate the likelihood of an individual to pay back their debt. In our report, credit ratings are represented by 3 grades, poor, fair and good. poor would mean high risk of debtor not paying off their debt, fair means there is some risk but they are worth granting credit and good means the debtor has high creditworthiness and low risk of default.
@@ -138,12 +139,10 @@ This scatter plot will help us understand the relationship between our two conti
 ggplot(my_data, aes(x = debt_to_income_ratio, y = credit_utilization_ratio)) +
   geom_point() +
   geom_smooth(method = "lm", col = "red") +
-  labs(title = 'Debt to Income Ratio  vs. Credit Utilization Ratio', x = 'Credit Utilization Ratio', y = 'Credit Utilization Ratio')
+  labs(title = 'Debt to Income Ratio  vs. Credit Utilization Ratio', x = 'Debt to Income Ratio', y = 'Credit Utilization Ratio')
 ```
 
-By inspecting the scatter plot above, we see a weak linear relationship between debt to income ratio and credit utilization ratio. We can also find the correlation coefficient by using the R built in function `cor()` to examine the relationship between the two variables. For these two variables we find the correlation coefficient to be ``r cor(my_data$debt_to_income_ratio, my_data$credit_utilization_ratio)``, which supports the weak positive linear relationship that we see visually from the scatter plot. </br>
-What is being indicated by the red line is a linear regression model showing a general trend. The general trend is that as the debt to income ratio increases, the credit utilization ratio also increases slightly. This suggests that there are other factors that influence an individual's credit utilization ratio besides their debt to income ratio. 
-Overall, the positive linear correlation provides some information, but it also suggests that further analyses using other variables needs to be done to understand the factors involved.
+By inspecting the scatter plot above, we see a weak linear relationship between debt to income ratio and credit utilization ratio. We can also find the correlation coefficient by using the R built in function `cor()` to examine the relationship between the two variables. For these two variables we find the correlation coefficient to be `r cor(my_data$debt_to_income_ratio, my_data$credit_utilization_ratio)`, which supports the weak positive linear relationship that we see visually from the scatter plot. </br> What is being indicated by the red line is a linear regression model showing a general trend. The general trend is that as the debt to income ratio increases, the credit utilization ratio also increases slightly. This suggests that there are other factors that influence an individual's credit utilization ratio besides their debt to income ratio. Overall, the positive linear correlation provides some information, but it also suggests that further analyses using other variables needs to be done to understand the factors involved.
 
 ### Box plot of Debt to Income Ratio vs. Credit Utilization Ratio
 
@@ -151,34 +150,74 @@ Overall, the positive linear correlation provides some information, but it also 
 # Boxplot of Total Monthly Production by Solar Panel Type and Battery Storage
 ggplot(my_data, aes(x = occupation, y = debt_to_income_ratio, fill = as.factor(credit_rating))) +
   geom_boxplot() +
-  labs(title = 'Average Monthly Production by Solar Panel Type and Battery Storage', x = 'Solar Panel Type', y = 'Average Monthly Production (kWh)', fill = 'Battery Storage')
+  labs(title = 'Debt to income ratio vs credit rating by occupation', x = 'Occupation', y = 'Debt to income ratio', fill = 'Credit Rating')
+
+```
+
+For `fair credit ratings`, engineers generally have higher quartiles. This shows that they tend to have a higher debt to income ratio even when maintaining a fair credit rating.
+
+For `good credit ratings`, the median is fairly close between all occupations.
+
+For `poor credit ratings`, there is an insignificant number of engineers and managers. Clerks have a significanctly higher median debt to income ratio than all the other occupations. 
+
+## Statistical Inference
+
+### Estimation
+
+``` {r}
+options(scipen=999) # to see decimals not exponential notation
+
+#Discrete variable
+late_payments <- my_data$number_of_late_payments
+payment_freq <- c(20, 57, 48, 23, 33, 13, 19,  9,  9,  5,  3,  3,  1,  1)
+discrete_late_payments <- c(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14)
+
+# Poison fit
+lambda_hat <- mean(late_payments)
+pois <- dpois(x=discrete_late_payments, lambda = lambda_hat)
+pois[length(pois)] <- 1 - sum(pois[1:length(pois)-1])
+
+ev_late_payments <- round(pois*nrow(my_data))
+  
+data <- data.frame(
+  late_payments = discrete_late_payments,
+  observed = payment_freq,
+  pois = ev_late_payments
+)
+
+#Data wrangling
+data2 <- data |>
+  pivot_longer(names_to = "shapes", values_to="values", observed:pois)
+
+
+#plot
+ggplot(data2, aes(x = late_payments, y= values, fill = shapes))+
+  geom_bar(position="dodge", stat="identity")+
+  labs(title="Plot of poisson distribution")
+
+
 
 ```
 
 
 
-## Statistical Inference
-
-This section is for statistical inference.
-
-
 ### Interval Estimation
 
-``` {r}
+```{r}
 ci <- ci_mean(my_data$credit_utilization_ratio) 
 
 # Preview
 ci
 ```
 
-The 95% confidence interval for credit utilization ratio is approximately [0.3977805,0.4223015]. This interval means the true value of the average credit utilization ratio is within this range. This information is important in determining the range of DTI in the population.
-
+The 95% confidence interval for credit utilization ratio is approximately \[0.3977805,0.4223015\]. This interval means the true value of the average credit utilization ratio is within this range. This information is important in determining the range of DTI in the population.
 
 ### Hypothesis testing
 
 ```{r}
 mean1 <- mean(my_data$debt_to_income_ratio)
 ```
+
 Null Hypothesis (H0): The true mean for debt to income ratio is equal to `r mean1`
 
 Alternative Hypothesis (H1): The true mean for debt to income ratio is equal to `r mean1`
@@ -190,27 +229,37 @@ t_test
 
 The p-value from the t-test is equal to 1, indicating that we fail to reject the null hypothesis. Therefore, the true mean of the population for debt to income ration is `r mean1`.
 
-
-
 ### Goodness-of-fit Test
+
 ```{r}
 hist(my_data$number_of_late_payments, xlab = "Number of late payments", main = "Histogram of number of late payments", col = "#006B34")
 ```
 
-```{r}
-freq = table(my_data$number_of_late_payments)
-
-dt(x = freq, df = length(freq))
-
-```
 ## Insights
 
-Provide key findings.
+Based on the exploratory data analysis and statistical inference, here are the key insights:
+
+1. **Distribution of Occupations**: The range in occupations, their salaries and skill level allow us to use info we get from analysing this distribution for other occupations not included in the dataset.
+
+2. **Occupation creditworthiness**: High earning jobs such as engineers and managers produce very few if any individuals with poor creditworthiness.
+
+3. **DTI and credit utilization ratio relationship**: Although there is some relationship between the two rations, DTI is affected by more than the credit utilization ratio.
+
+4. **DTI and credit utilization ratio relationship**: From the hypotheses test, we see that there is no significant difference between the average debt to income and the true mean of the population. This serves as a foundation for further research on the distribution, knowing that we are certain about the value of the true mean.
 
 ## Conclusion
 
-Conclude report.
+This report provides an analysis on various various variables that can affect an individual's credit score. Through exploratory data analysis, we identified the distributions and relationships between variables. Statistical inference methods were used to draw conclusions about the data. Key insights highlighted the overall trends and relationships within the dataset. This analysis can help inform decisions related to solar power production and the factors that influence it.
+
+The analyses suggest that a high paying occupation protects an individual from having a poor credit rating. It has also been confirmed that the true average for debt to income ratio is `r mean1`.
 
 ### Recommendations
 
-What would you recommend based on your findings?
+Based on the insights gained from this analysis, the following recommendations can be made:
+
+1.  **Targeted Financial Literacy Programs**: Clerks have a high median debt to income ratio. It would be helpful to create tailor made education products for them in order to boost their credit health. 
+
+2.  **Address Variability in Sunlight**: 
+
+3.  **Optimize Daily Production**: 
+
