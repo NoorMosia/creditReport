@@ -38,7 +38,7 @@ my_data <- read_csv("credit_data.csv")
 
 ## Introduction
 
-In this report we will be using a random sample of `r count(my_data)` individuals to look at the relationship between a debtor's occupation, number of late payments for debts, debt to income ratio and credit utilization ratio. Then analyse how these variables affect a debtor's credit score. Furthermore, we will make use of statistical inference techniques to make decisions about the parameters related to debtors and their credit score based on the random sample we have acquired for this report.
+In this report we will be using a random sample of `r count(my_data)` individuals to look at the relationship between a debtor's occupation, number of late payments for debts, debt to income ratio and credit utilization ratio. Then analyse how these variables affect a debtor's credit rating. Furthermore, we will make use of statistical inference techniques to make decisions about the parameters related to debtors and their credit score based on the random sample we have acquired for this report.
 
 The reason I chose this particular dataset is because I am interested in pursuing a career in the financial sector. This project will provide me with valuable foundational knowledge that is essential in understanding the industry.
 
@@ -48,11 +48,11 @@ The reason I chose this particular dataset is because I am interested in pursuin
 
 -   **`occupation`**: Categorical variable representing the job or profession of the individuals in the random sample.
 
--   **`credit_rating`**: Categorical variable, usually a number but for simplicity this time we it as a categorical variable. It represents an individial's creditworthiness. It is determined by looking at an individual's history and repayment behaviours.
+-   **`credit_rating`**: Categorical variable, It represents an individual's creditworthiness. It is determined by looking at an individual's history and repayment behaviors.
 
 -   **`number_of_late_payments`**: Numerically discrete variable. Counts the number of times an individual made a late payment on their loan repayment.
 
--   **`debt_to_income_ratio`**: Continuos variable. Measures the ratio of an individual's monthly debt payments to their gross income.
+-   **`debt_to_income_ratio`**: Continuous variable. Measures the ratio of an individual's monthly debt payments to their gross income.
 
 -   **`credit utilization_ratio`**: Continuous variable. Represents the ratio of an individual's credit used and the total credit available to the them.
 
@@ -61,6 +61,7 @@ The reason I chose this particular dataset is because I am interested in pursuin
 The table below shows the distribution of the sample data terms of the occupations of each of the `r count(my_data)` individuals:
 
 ```{r}
+#| label: distribution of occupations
 occupationTable <-table(my_data$occupation)
 occupationTable
 ```
@@ -136,6 +137,10 @@ This scatter plot will help us understand the relationship between our two conti
 
 ```{r}
 # Scatter plot of Debt to Income Ratio vs. Credit Utilization Ratio
+#| label: fig-occupations
+#| fig-cap: "Debt to Income Ratio  vs. Credit Utilization Ratio"
+#| fig-align: "center"
+
 ggplot(my_data, aes(x = debt_to_income_ratio, y = credit_utilization_ratio)) +
   geom_point() +
   geom_smooth(method = "lm", col = "red") +
@@ -158,13 +163,15 @@ For `fair credit ratings`, engineers generally have higher quartiles. This shows
 
 For `good credit ratings`, the median is fairly close between all occupations.
 
-For `poor credit ratings`, there is an insignificant number of engineers and managers. Clerks have a significanctly higher median debt to income ratio than all the other occupations. 
+For `poor credit ratings`, there is an insignificant number of engineers and managers. Clerks have a significanctly higher median debt to income ratio than all the other occupations.
 
 ## Statistical Inference
 
 ### Estimation
 
-``` {r}
+For this dataset, the discrete variable is `number_of_late_payments`. The poisson distribution is going to be fitted on this variable. By the method of moments process, the sample mean is used to estimate the unknown lambda parameter of the poisson distribution. So the sample mean of ``r mean(my_data$number_of_late_payments)`` will be used to estimate lambda.
+
+```{r}
 options(scipen=999) # to see decimals not exponential notation
 
 #Discrete variable
@@ -180,7 +187,7 @@ pois[length(pois)] <- 1 - sum(pois[1:length(pois)-1])
 ev_late_payments <- round(pois*nrow(my_data))
   
 data <- data.frame(
-  late_payments = discrete_late_payments,
+  late_payments = as.factor(discrete_late_payments),
   observed = payment_freq,
   pois = ev_late_payments
 )
@@ -189,17 +196,23 @@ data <- data.frame(
 data2 <- data |>
   pivot_longer(names_to = "shapes", values_to="values", observed:pois)
 
-
 #plot
 ggplot(data2, aes(x = late_payments, y= values, fill = shapes))+
   geom_bar(position="dodge", stat="identity")+
   labs(title="Plot of poisson distribution")
-
-
-
 ```
 
+Looking at the graph, it is evident that the poisson distribution is not a good fit. We will try to further confirm this findings by performing a goodness-of-fit test.
 
+### Goodness-of-fit Test
+
+```{r}
+options(warn=-1) # remove the warning message
+fit <- chisq.test(x=payment_freq, p=pois)
+fit
+```
+
+The goodness-of-fit-test confirms the visual finding of poisson ``r mean(my_data$number_of_late_payments)`` not being a suitable distribution to fit `number_of_late_payments`.
 
 ### Interval Estimation
 
@@ -218,7 +231,7 @@ The 95% confidence interval for credit utilization ratio is approximately \[0.39
 mean1 <- mean(my_data$debt_to_income_ratio)
 ```
 
-Null Hypothesis (H0): The true mean for debt to income ratio is equal to `r mean1`
+Null Hypothesis (H0): The true mean for debt to income ratio is equal to ``r mean(my_data$number_of_late_payments)``
 
 Alternative Hypothesis (H1): The true mean for debt to income ratio is equal to `r mean1`
 
@@ -229,23 +242,20 @@ t_test
 
 The p-value from the t-test is equal to 1, indicating that we fail to reject the null hypothesis. Therefore, the true mean of the population for debt to income ration is `r mean1`.
 
-### Goodness-of-fit Test
-
-```{r}
-hist(my_data$number_of_late_payments, xlab = "Number of late payments", main = "Histogram of number of late payments", col = "#006B34")
-```
-
 ## Insights
 
 Based on the exploratory data analysis and statistical inference, here are the key insights:
 
-1. **Distribution of Occupations**: The range in occupations, their salaries and skill level allow us to use info we get from analysing this distribution for other occupations not included in the dataset.
+1.  **Distribution of Occupations**: The range in occupations, their salaries and skill level allow us to use info we get from analysing this distribution for other occupations not included in the dataset.
 
-2. **Occupation creditworthiness**: High earning jobs such as engineers and managers produce very few if any individuals with poor creditworthiness.
+2.  **Occupation creditworthiness**: High earning jobs such as engineers and managers produce very few if any individuals with poor creditworthiness.
 
-3. **DTI and credit utilization ratio relationship**: Although there is some relationship between the two rations, DTI is affected by more than the credit utilization ratio.
+3.  **DTI and credit utilization ratio relationship**: Although there is some relationship between the two rations, DTI is affected by more than the credit utilization ratio.
 
-4. **DTI and credit utilization ratio relationship**: From the hypotheses test, we see that there is no significant difference between the average debt to income and the true mean of the population. This serves as a foundation for further research on the distribution, knowing that we are certain about the value of the true mean.
+4.  **DTI and credit utilization ratio relationship**: From the hypotheses test, we see that there is no significant difference between the average debt to income and the true mean of the population. This serves as a foundation for further research on the distribution, knowing that we are certain about the value of the true mean.
+
+
+5.  **Distribution for discrete variable**: By doing a method of moments estimation and performing a goodness-of-fit test using the poisson distribution, we find that distribution is not a good fit for out discrete variable `number_of_late_payments`.
 
 ## Conclusion
 
@@ -253,13 +263,23 @@ This report provides an analysis on various various variables that can affect an
 
 The analyses suggest that a high paying occupation protects an individual from having a poor credit rating. It has also been confirmed that the true average for debt to income ratio is `r mean1`.
 
-### Recommendations
+## Recommendations
 
 Based on the insights gained from this analysis, the following recommendations can be made:
 
-1.  **Targeted Financial Literacy Programs**: Clerks have a high median debt to income ratio. It would be helpful to create tailor made education products for them in order to boost their credit health. 
+1.  **Targeted Financial Literacy Programs**: Clerks have a high median debt to income ratio. It would be helpful to create tailor made education products for them in order to boost their credit health.
 
-2.  **Address Variability in Sunlight**: 
+2.  **Try another estimation method**: Since we know that the poisson distribution is not a good fit, further analysis can be done using other distributions.
 
-3.  **Optimize Daily Production**: 
+3.  **Using results from hypothesis test**: Since we have found the true mean for the population through a hypothesis test, we can use the results from this report to spot sampling errors in future analyses.
+
+
+
+
+
+
+
+
+
+
 

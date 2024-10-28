@@ -156,7 +156,7 @@ background: #141c2b;
 </div>
 <section id="introduction" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">1</span> Introduction</h2>
-<p>In this report we will be using a random sample of 244 individuals to look at the relationship between a debtor’s occupation, number of late payments for debts, debt to income ratio and credit utilization ratio. Then analyse how these variables affect a debtor’s credit score. Furthermore, we will make use of statistical inference techniques to make decisions about the parameters related to debtors and their credit score based on the random sample we have acquired for this report.</p>
+<p>In this report we will be using a random sample of 244 individuals to look at the relationship between a debtor’s occupation, number of late payments for debts, debt to income ratio and credit utilization ratio. Then analyse how these variables affect a debtor’s credit rating. Furthermore, we will make use of statistical inference techniques to make decisions about the parameters related to debtors and their credit score based on the random sample we have acquired for this report.</p>
 <p>The reason I chose this particular dataset is because I am interested in pursuing a career in the financial sector. This project will provide me with valuable foundational knowledge that is essential in understanding the industry.</p>
 </section>
 <section id="data" class="level2" data-number="2">
@@ -165,9 +165,9 @@ background: #141c2b;
 <h3 data-number="2.1" class="anchored" data-anchor-id="variables-summary"><span class="header-section-number">2.1</span> Variables Summary</h3>
 <ul>
 <li><p><strong><code>occupation</code></strong>: Categorical variable representing the job or profession of the individuals in the random sample.</p></li>
-<li><p><strong><code>credit_rating</code></strong>: Categorical variable, usually a number but for simplicity this time we it as a categorical variable. It represents an individial’s creditworthiness. It is determined by looking at an individual’s history and repayment behaviours.</p></li>
+<li><p><strong><code>credit_rating</code></strong>: Categorical variable, It represents an individual’s creditworthiness. It is determined by looking at an individual’s history and repayment behaviors.</p></li>
 <li><p><strong><code>number_of_late_payments</code></strong>: Numerically discrete variable. Counts the number of times an individual made a late payment on their loan repayment.</p></li>
-<li><p><strong><code>debt_to_income_ratio</code></strong>: Continuos variable. Measures the ratio of an individual’s monthly debt payments to their gross income.</p></li>
+<li><p><strong><code>debt_to_income_ratio</code></strong>: Continuous variable. Measures the ratio of an individual’s monthly debt payments to their gross income.</p></li>
 <li><p><strong><code>credit utilization_ratio</code></strong>: Continuous variable. Represents the ratio of an individual’s credit used and the total credit available to the them.</p></li>
 </ul>
 </section>
@@ -506,10 +506,14 @@ Figure&nbsp;1: Occupations Distribution
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Scatter plot of Debt to Income Ratio vs. Credit Utilization Ratio</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">ggplot</span>(my_data, <span class="fu">aes</span>(<span class="at">x =</span> debt_to_income_ratio, <span class="at">y =</span> credit_utilization_ratio)) <span class="sc">+</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">col =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Debt to Income Ratio  vs. Credit Utilization Ratio'</span>, <span class="at">x =</span> <span class="st">'Debt to Income Ratio'</span>, <span class="at">y =</span> <span class="st">'Credit Utilization Ratio'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co">#| label: fig-occupations</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="co">#| fig-cap: "Debt to Income Ratio  vs. Credit Utilization Ratio"</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#| fig-align: "center"</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="fu">ggplot</span>(my_data, <span class="fu">aes</span>(<span class="at">x =</span> debt_to_income_ratio, <span class="at">y =</span> credit_utilization_ratio)) <span class="sc">+</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">col =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Debt to Income Ratio  vs. Credit Utilization Ratio'</span>, <span class="at">x =</span> <span class="st">'Debt to Income Ratio'</span>, <span class="at">y =</span> <span class="st">'Credit Utilization Ratio'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -548,6 +552,7 @@ Figure&nbsp;1: Occupations Distribution
 <h2 data-number="4" class="anchored" data-anchor-id="statistical-inference"><span class="header-section-number">4</span> Statistical Inference</h2>
 <section id="estimation" class="level3" data-number="4.1">
 <h3 data-number="4.1" class="anchored" data-anchor-id="estimation"><span class="header-section-number">4.1</span> Estimation</h3>
+<p>For this dataset, the discrete variable is <code>number_of_late_payments</code>. The poisson distribution is going to be fitted on this variable. By the method of moments process, the sample mean is used to estimate the unknown lambda parameter of the poisson distribution. So the sample mean of <code>3.2868852</code> will be used to estimate lambda.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -566,7 +571,7 @@ Figure&nbsp;1: Occupations Distribution
 <span id="cb9-13"><a href="#cb9-13"></a>ev_late_payments <span class="ot">&lt;-</span> <span class="fu">round</span>(pois<span class="sc">*</span><span class="fu">nrow</span>(my_data))</span>
 <span id="cb9-14"><a href="#cb9-14"></a>  </span>
 <span id="cb9-15"><a href="#cb9-15"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb9-16"><a href="#cb9-16"></a>  <span class="at">late_payments =</span> discrete_late_payments,</span>
+<span id="cb9-16"><a href="#cb9-16"></a>  <span class="at">late_payments =</span> <span class="fu">as.factor</span>(discrete_late_payments),</span>
 <span id="cb9-17"><a href="#cb9-17"></a>  <span class="at">observed =</span> payment_freq,</span>
 <span id="cb9-18"><a href="#cb9-18"></a>  <span class="at">pois =</span> ev_late_payments</span>
 <span id="cb9-19"><a href="#cb9-19"></a>)</span>
@@ -575,11 +580,10 @@ Figure&nbsp;1: Occupations Distribution
 <span id="cb9-22"><a href="#cb9-22"></a>data2 <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span></span>
 <span id="cb9-23"><a href="#cb9-23"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"shapes"</span>, <span class="at">values_to=</span><span class="st">"values"</span>, observed<span class="sc">:</span>pois)</span>
 <span id="cb9-24"><a href="#cb9-24"></a></span>
-<span id="cb9-25"><a href="#cb9-25"></a></span>
-<span id="cb9-26"><a href="#cb9-26"></a><span class="co">#plot</span></span>
-<span id="cb9-27"><a href="#cb9-27"></a><span class="fu">ggplot</span>(data2, <span class="fu">aes</span>(<span class="at">x =</span> late_payments, <span class="at">y=</span> values, <span class="at">fill =</span> shapes))<span class="sc">+</span></span>
-<span id="cb9-28"><a href="#cb9-28"></a>  <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">"dodge"</span>, <span class="at">stat=</span><span class="st">"identity"</span>)<span class="sc">+</span></span>
-<span id="cb9-29"><a href="#cb9-29"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Plot of poisson distribution"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-25"><a href="#cb9-25"></a><span class="co">#plot</span></span>
+<span id="cb9-26"><a href="#cb9-26"></a><span class="fu">ggplot</span>(data2, <span class="fu">aes</span>(<span class="at">x =</span> late_payments, <span class="at">y=</span> values, <span class="at">fill =</span> shapes))<span class="sc">+</span></span>
+<span id="cb9-27"><a href="#cb9-27"></a>  <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">"dodge"</span>, <span class="at">stat=</span><span class="st">"identity"</span>)<span class="sc">+</span></span>
+<span id="cb9-28"><a href="#cb9-28"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Plot of poisson distribution"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -589,16 +593,36 @@ Figure&nbsp;1: Occupations Distribution
 </div>
 </div>
 </div>
+<p>Looking at the graph, it is evident that the poisson distribution is not a good fit. We will try to further confirm this findings by performing a goodness-of-fit test.</p>
 </section>
-<section id="interval-estimation" class="level3" data-number="4.2">
-<h3 data-number="4.2" class="anchored" data-anchor-id="interval-estimation"><span class="header-section-number">4.2</span> Interval Estimation</h3>
+<section id="goodness-of-fit-test" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="goodness-of-fit-test"><span class="header-section-number">4.2</span> Goodness-of-fit Test</h3>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>ci <span class="ot">&lt;-</span> <span class="fu">ci_mean</span>(my_data<span class="sc">$</span>credit_utilization_ratio) </span>
-<span id="cb10-2"><a href="#cb10-2"></a></span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="co"># Preview</span></span>
-<span id="cb10-4"><a href="#cb10-4"></a>ci</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">options</span>(<span class="at">warn=</span><span class="sc">-</span><span class="dv">1</span>) <span class="co"># remove the warning message</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>fit <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(<span class="at">x=</span>payment_freq, <span class="at">p=</span>pois)</span>
+<span id="cb10-3"><a href="#cb10-3"></a>fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Chi-squared test for given probabilities
+
+data:  payment_freq
+X-squared = 316.51, df = 13, p-value &lt; 0.00000000000000022</code></pre>
+</div>
+</div>
+<p>The goodness-of-fit-test confirms the visual finding of poisson <code>3.2868852</code> not being a suitable distribution to fit <code>number_of_late_payments</code>.</p>
+</section>
+<section id="interval-estimation" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="interval-estimation"><span class="header-section-number">4.3</span> Interval Estimation</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>ci <span class="ot">&lt;-</span> <span class="fu">ci_mean</span>(my_data<span class="sc">$</span>credit_utilization_ratio) </span>
+<span id="cb12-2"><a href="#cb12-2"></a></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="co"># Preview</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>ci</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -612,21 +636,21 @@ Confidence interval:
 </div>
 <p>The 95% confidence interval for credit utilization ratio is approximately [0.3977805,0.4223015]. This interval means the true value of the average credit utilization ratio is within this range. This information is important in determining the range of DTI in the population.</p>
 </section>
-<section id="hypothesis-testing" class="level3" data-number="4.3">
-<h3 data-number="4.3" class="anchored" data-anchor-id="hypothesis-testing"><span class="header-section-number">4.3</span> Hypothesis testing</h3>
+<section id="hypothesis-testing" class="level3" data-number="4.4">
+<h3 data-number="4.4" class="anchored" data-anchor-id="hypothesis-testing"><span class="header-section-number">4.4</span> Hypothesis testing</h3>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>mean1 <span class="ot">&lt;-</span> <span class="fu">mean</span>(my_data<span class="sc">$</span>debt_to_income_ratio)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>mean1 <span class="ot">&lt;-</span> <span class="fu">mean</span>(my_data<span class="sc">$</span>debt_to_income_ratio)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Null Hypothesis (H0): The true mean for debt to income ratio is equal to 0.3346311</p>
+<p>Null Hypothesis (H0): The true mean for debt to income ratio is equal to <code>3.2868852</code></p>
 <p>Alternative Hypothesis (H1): The true mean for debt to income ratio is equal to 0.3346311</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>t_test <span class="ot">=</span> <span class="fu">t.test</span>(<span class="at">x=</span>my_data<span class="sc">$</span>debt_to_income_ratio, <span class="at">mu=</span>mean1, <span class="at">alternative=</span><span class="st">"two.sided"</span>)</span>
-<span id="cb13-2"><a href="#cb13-2"></a>t_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>t_test <span class="ot">=</span> <span class="fu">t.test</span>(<span class="at">x=</span>my_data<span class="sc">$</span>debt_to_income_ratio, <span class="at">mu=</span>mean1, <span class="at">alternative=</span><span class="st">"two.sided"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2"></a>t_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -644,22 +668,6 @@ mean of x
 </div>
 <p>The p-value from the t-test is equal to 1, indicating that we fail to reject the null hypothesis. Therefore, the true mean of the population for debt to income ration is 0.3346311.</p>
 </section>
-<section id="goodness-of-fit-test" class="level3" data-number="4.4">
-<h3 data-number="4.4" class="anchored" data-anchor-id="goodness-of-fit-test"><span class="header-section-number">4.4</span> Goodness-of-fit Test</h3>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">hist</span>(my_data<span class="sc">$</span>number_of_late_payments, <span class="at">xlab =</span> <span class="st">"Number of late payments"</span>, <span class="at">main =</span> <span class="st">"Histogram of number of late payments"</span>, <span class="at">col =</span> <span class="st">"#006B34"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
 </section>
 <section id="insights" class="level2" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="insights"><span class="header-section-number">5</span> Insights</h2>
@@ -669,21 +677,22 @@ mean of x
 <li><p><strong>Occupation creditworthiness</strong>: High earning jobs such as engineers and managers produce very few if any individuals with poor creditworthiness.</p></li>
 <li><p><strong>DTI and credit utilization ratio relationship</strong>: Although there is some relationship between the two rations, DTI is affected by more than the credit utilization ratio.</p></li>
 <li><p><strong>DTI and credit utilization ratio relationship</strong>: From the hypotheses test, we see that there is no significant difference between the average debt to income and the true mean of the population. This serves as a foundation for further research on the distribution, knowing that we are certain about the value of the true mean.</p></li>
+<li><p><strong>Distribution for discrete variable</strong>: By doing a method of moments estimation and performing a goodness-of-fit test using the poisson distribution, we find that distribution is not a good fit for out discrete variable <code>number_of_late_payments</code>.</p></li>
 </ol>
 </section>
 <section id="conclusion" class="level2" data-number="6">
 <h2 data-number="6" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">6</span> Conclusion</h2>
 <p>This report provides an analysis on various various variables that can affect an individual’s credit score. Through exploratory data analysis, we identified the distributions and relationships between variables. Statistical inference methods were used to draw conclusions about the data. Key insights highlighted the overall trends and relationships within the dataset. This analysis can help inform decisions related to solar power production and the factors that influence it.</p>
 <p>The analyses suggest that a high paying occupation protects an individual from having a poor credit rating. It has also been confirmed that the true average for debt to income ratio is 0.3346311.</p>
-<section id="recommendations" class="level3" data-number="6.1">
-<h3 data-number="6.1" class="anchored" data-anchor-id="recommendations"><span class="header-section-number">6.1</span> Recommendations</h3>
+</section>
+<section id="recommendations" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="recommendations"><span class="header-section-number">7</span> Recommendations</h2>
 <p>Based on the insights gained from this analysis, the following recommendations can be made:</p>
 <ol type="1">
 <li><p><strong>Targeted Financial Literacy Programs</strong>: Clerks have a high median debt to income ratio. It would be helpful to create tailor made education products for them in order to boost their credit health.</p></li>
-<li><p><strong>Address Variability in Sunlight</strong>:</p></li>
-<li><p><strong>Optimize Daily Production</strong>:</p></li>
+<li><p><strong>Try another estimation method</strong>: Since we know that the poisson distribution is not a good fit, further analysis can be done using other distributions.</p></li>
+<li><p><strong>Using results from hypothesis test</strong>: Since we have found the true mean for the population through a hypothesis test, we can use the results from this report to spot sampling errors in future analyses.</p></li>
 </ol>
-</section>
 </section>
 
 </main>
